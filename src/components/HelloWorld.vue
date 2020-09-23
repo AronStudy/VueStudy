@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <slot />
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -27,6 +28,10 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <div>
+      <div class="c1">left</div>
+      <div class="c2">right</div>
+    </div>
   </div>
 </template>
 
@@ -34,7 +39,35 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    msg: {
+      type: [String],
+      default: 'abc'
+    }
+  },
+  data() {
+    return {
+      msg6: 4
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.msg6 = 5
+      this.$nextTick(() => {
+        console.log(this.msg6)
+      })
+    }, 0)
+    setTimeout(() => {
+      this.msg6 = 6
+      console.log(document.getElementById('123').innerHTML)
+    }, 0)
+    this.$nextTick(() => {
+      console.log(this.msg6)
+    })
+  },
+  methods: {
+    go() {
+      this.msg6 = 7
+    }
   }
 }
 </script>
@@ -54,5 +87,17 @@ li {
 }
 a {
   color: #42b983;
+}
+div+p{color:red;}
+*{
+  color:#42b983
+}
+.c1{
+   margin-bottom: 10px;
+   float: left;
+}
+.c2{
+  margin-top: 10px;
+  float: left;
 }
 </style>
